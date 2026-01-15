@@ -294,19 +294,35 @@
             </p>
             
             <div class="mt-12 bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100">
-                <div class="px-6 py-8 sm:p-10">
-                    <div class="flex items-center justify-center mb-4">
-                         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800" data-i18n="soon_badge">W produkcji</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl" data-i18n="soon_feature_title">Kalkulator Czasu Pracy Kierowców</h3>
-                    <p class="mt-4 text-lg text-gray-500" data-i18n="soon_feature_desc">
-                        Kompleksowe narzędzie do obliczania kar związanych z naruszeniem przepisów o czasie jazdy i odpoczynku w Niemczech (Lenk- und Ruhezeiten).
-                    </p>
-                    <div class="mt-8">
-                        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-200 max-w-md mx-auto">
-                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                <div class="lg:grid lg:grid-cols-2 items-center">
+                    <div class="px-6 py-8 sm:p-10 text-left">
+                        <div class="flex items-center mb-4">
+                             <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800" data-i18n="soon_badge">W produkcji</span>
                         </div>
-                        <p class="mt-2 text-sm text-gray-400 font-medium">75% <span data-i18n="soon_progress">ukończone</span></p>
+                        <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl" data-i18n="soon_feature_title">Kalkulator Czasu Pracy Kierowców</h3>
+                        <p class="mt-4 text-lg text-gray-500" data-i18n="soon_feature_desc">
+                            Kompleksowe narzędzie do obliczania kar związanych z naruszeniem przepisów o czasie jazdy i odpoczynku w Niemczech (Lenk- und Ruhezeiten).
+                        </p>
+                        <div class="mt-8">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-200 max-w-md">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-400 font-medium">75% <span data-i18n="soon_progress">ukończone</span></p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50/50 p-8 flex flex-col items-center justify-center border-t lg:border-t-0 lg:border-l border-blue-50">
+                        <div class="grid place-items-center w-full">
+                            <img src="assets/lkw_calculator.png" alt="LKW Calculator Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-100 rounded-xl">
+                            <img src="assets/bag_control.png" alt="BAG Control Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
+                            <img src="assets/jail_driver.png" alt="Driver in Jail Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
+                            <img src="assets/family_visit.png" alt="Family Visit Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
+                        </div>
+                        <div class="flex space-x-2 mt-6 z-10">
+                            <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-600 transition-all duration-300"></button>
+                            <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
+                            <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
+                            <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -476,6 +492,52 @@
             currentLang = currentLang === 'pl' ? 'de' : 'pl';
             updateLanguage(currentLang);
         });
+
+        // Slideshow Logic
+        const slides = document.querySelectorAll('.slideshow-img');
+        const dots = document.querySelectorAll('.slideshow-dot');
+        let currentSlide = 0;
+
+        function updateSlide(index) {
+            // Update images
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                }
+            });
+
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-blue-200');
+                    dot.classList.add('bg-blue-600');
+                } else {
+                    dot.classList.remove('bg-blue-600');
+                    dot.classList.add('bg-blue-200');
+                }
+            });
+
+            currentSlide = index;
+        }
+
+        if (slides.length > 0) {
+            // Auto advance
+            setInterval(() => {
+                const nextSlide = (currentSlide + 1) % slides.length;
+                updateSlide(nextSlide);
+            }, 4000);
+
+            // Click handling for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateSlide(index);
+                });
+            });
+        }
     </script>
 
 </body>
