@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FineTruck DE - Kalkulator Mandatów Niemcy 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom Animations */
+        @keyframes float {
+            0% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(0px); }
+            50% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(-20px); }
+            100% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* 3D Depth Effect using box-shadow */
+        .phone-3d {
+            box-shadow: 
+                -15px 15px 30px rgba(0,0,0,0.3), /* Deep shadow */
+                -2px 2px 0px #1f2937, /* Fake thickness (Dark Gray) */
+                -4px 4px 0px #111827; /* Fake thickness (Black) */
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            opacity: 0; /* Start hidden */
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center cursor-pointer hover:opacity-80 transition">
+                    <span class="font-bold text-xl tracking-tight text-gray-900">FineTruck DE 🇩🇪</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#funkcje" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_features">Funkcje</a>
+                    <a href="#o-aplikacji" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_about">O aplikacji</a>
+                    <a href="#rozwoj" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_roadmap">Rozwój</a>
+                    
+                    <!-- Language Switcher -->
+                    <button id="lang-toggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-gray-200 hover:bg-gray-100 transition text-sm font-semibold text-gray-600">
+                        <span>PL</span>
+                        <span class="text-gray-300">|</span>
+                        <span class="text-gray-400">DE</span>
+                    </button>
+                </div>
+                <div>
+                    <a href="#pobierz" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition transform hover:scale-105 duration-200 shadow-lg hover:shadow-xl" data-i18n="nav_download">Pobierz</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden pt-16 pb-32 lg:pt-24 lg:pb-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <div class="fade-in-up inline-flex items-center px-3 py-1 rounded-full border border-blue-100 bg-blue-50 mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
+                        <span class="text-xs font-semibold text-blue-600 uppercase tracking-wide" data-i18n="hero_badge">Aktualizacja 2026</span>
+                    </div>
+                    <h1 class="fade-in-up delay-100 text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+                        <span data-i18n="hero_title_prefix">Kalkulator mandatów</span> <br class="hidden lg:block" />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600" data-i18n="hero_title_suffix">Niemcy 2026</span>
+                    </h1>
+                    <p class="fade-in-up delay-200 mt-4 text-lg text-gray-500 sm:mt-6" data-i18n="hero_desc">
+                        Uniknij niespodzianek na drodze. Oblicz wysokość mandatu szybko i precyzyjnie, zgodnie z najnowszym taryfikatorem niemieckim (Bußgeldkatalog).
+                    </p>
+                    <div class="fade-in-up delay-300 mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                            <!-- Google Play Button (Fixed Size) -->
+                            <button class="group w-64 h-16 flex items-center justify-center border border-transparent text-base font-medium rounded-xl text-white bg-gray-900 hover:bg-gray-800 md:text-lg transition-all duration-200 transform hover:-translate-y-1 hover:shadow-xl">
+                                <svg class="w-7 h-7 mr-3 transition-transform group-hover:scale-110 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414C17.523 15.3414 17.563 15.3414 17.563 15.3414C17.563 15.3414 17.603 15.3414 17.603 15.3414C17.603 15.3414 17.643 15.3414 17.643 15.3414C17.643 15.3414 17.683 15.3414 17.683 15.3414C17.683 15.3414 17.723 15.3414 17.723 15.3414C17.723 15.3414 17.763 15.3414 17.763 15.3414C17.763 15.3414 17.803 15.3414 17.803 15.3414C17.803 15.3414 17.843 15.3414 17.843 15.3414C17.843 15.3414 17.883 15.3414 17.883 15.3414C18.963 14.7814 19.643 13.6214 19.643 12.3814C19.643 10.3814 17.883 8.78137 15.803 8.78137C15.283 8.78137 14.803 8.86137 14.363 9.06137C13.923 7.02137 12.043 5.46137 9.80298 5.46137C7.08298 5.46137 4.88298 7.66137 4.88298 10.3814C4.88298 10.5014 4.88298 10.6614 4.88298 10.7814C2.60298 11.1414 0.922974 13.0614 0.922974 15.4214C0.922974 18.0614 3.00298 20.1414 5.60298 20.1414H17.483C19.923 20.1414 21.923 18.1414 21.923 15.7014C21.923 13.5814 20.443 11.7814 18.443 11.3814C18.443 11.3814 18.443 11.3414 18.443 11.3014C18.443 11.3014 18.403 11.3014 18.403 11.3014C18.403 11.3014 18.363 11.3014 18.363 11.3014L17.523 15.3414Z"/></svg>
+                                Google Play
+                            </button>
+                            
+                            <!-- QR Code Container (Fixed Size) -->
+                            <div class="hidden lg:flex w-64 h-16 items-center justify-center gap-4 bg-white rounded-xl border border-gray-200 shadow-sm transform transition hover:scale-105 hover:shadow-md cursor-pointer">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store" alt="QR Code" class="w-10 h-10 rounded-lg mix-blend-multiply flex-shrink-0">
+                                <div class="text-xs text-gray-600 font-semibold leading-snug text-left">
+                                    <span data-i18n="qr_text">Zeskanuj,<br>aby pobrać</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-400 text-center lg:text-left" data-i18n="store_sub">Dostępne na Androida</p>
+                    </div>
+                </div>
+
+                <!-- Phone Mockup -->
+                <div class="mt-12 lg:mt-0 lg:col-span-6 relative flex justify-center fade-in-up delay-300">
+                    <!-- Background blobs for visual interest -->
+                    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-50"></div>
+                    
+                    <div class="relative mx-auto w-full max-w-[288px] lg:max-w-[324px] animate-float">
+                        <div class="relative rounded-[3rem] bg-gray-900 overflow-hidden phone-3d border-[6px] border-gray-900">
+                            <!-- Notch/Camera placeholder if needed, usually built into image or styling -->
+                            <img src="assets/flutter_01-portrait.png" alt="Aplikacja FineTruck DE" class="w-full h-auto rounded-[2.5rem] bg-gray-800 block">
+                        </div>
+                        <!-- Shadow underneath -->
+                        <div class="absolute -bottom-16 left-0 w-full h-8 bg-black/20 blur-2xl rounded-[100%] transition-all duration-[3000ms] opacity-40 transform rotate-y-12"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div id="funkcje" class="bg-white py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase" data-i18n="feat_kicker">Możliwości</h2>
+                <p class="mt-1 text-3xl font-extrabold text-gray-900 sm:text-4xl" data-i18n="feat_title">
+                    Wszystko, czego potrzebujesz
+                </p>
+                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500" data-i18n="feat_desc">
+                    Proste narzędzie do skomplikowanych przepisów. Sprawdź, co oferuje FineTruck DE.
+                </p>
+            </div>
+
+            <div class="mt-16">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    
+                    <!-- Feature 1 -->
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-2xl px-6 pb-8 h-full hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-default">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-blue-500 rounded-xl shadow-lg transform transition hover:rotate-6">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight" data-i18n="f1_title">Kalkulator 2026</h3>
+                                <p class="mt-5 text-base text-gray-500" data-i18n="f1_desc">
+                                    Baza danych zaktualizowana o najnowsze stawki mandatów obowiązujące w Niemczech w 2026 roku.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-2xl px-6 pb-8 h-full hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-default">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-gray-900 rounded-xl shadow-lg transform transition hover:rotate-6">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight" data-i18n="f2_title">Osobówki i Ciężarowe</h3>
+                                <p class="mt-5 text-base text-gray-500" data-i18n="f2_desc">
+                                    Dedykowane tryby obliczeń dla samochodów osobowych oraz pojazdów ciężarowych.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-2xl px-6 pb-8 h-full hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-default">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-blue-500 rounded-xl shadow-lg transform transition hover:rotate-6">
+                                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight" data-i18n="f3_title">Automatyczna tolerancja</h3>
+                                <p class="mt-5 text-base text-gray-500" data-i18n="f3_desc">
+                                    Aplikacja automatycznie odejmuje wymaganą prawnie tolerancję (3 km/h lub 3%) od wyniku pomiaru.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="o-aplikacji" class="py-16 bg-white overflow-hidden lg:py-24">
+        <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
+            <div class="relative">
+                <h2 class="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl" data-i18n="about_title">Dlaczego FineTruck DE?</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500" data-i18n="about_subtitle">Twój osobisty asystent prawny na niemieckich drogach.</p>
+            </div>
+
+            <div class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+                <div class="relative">
+                    <h3 class="text-2xl font-bold text-gray-900 tracking-tight sm:text-3xl" data-i18n="about_head">Bezpieczeństwo i pewność</h3>
+                    <p class="mt-3 text-lg text-gray-500" data-i18n="about_text">
+                        Podróżowanie po Niemczech, zwłaszcza zawodowo, wiąże się z rygorystycznymi przepisami. Nasza aplikacja pomaga kierowcom i firmom transportowym w szybkiej weryfikacji potencjalnych kar, co pozwala na lepsze planowanie i unikanie stresu.
+                    </p>
+
+                    <dl class="mt-10 space-y-10">
+                        <div class="relative">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900" data-i18n="about_p1_title">Szybkie działanie</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-gray-500" data-i18n="about_p1_desc">
+                                Wynik otrzymasz w ułamku sekundy. Bez reklam, bez zbędnego klikania.
+                            </dd>
+                        </div>
+
+                        <div class="relative">
+                            <dt>
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                                </div>
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900" data-i18n="about_p2_title">Zawsze aktualne</p>
+                            </dt>
+                            <dd class="mt-2 ml-16 text-base text-gray-500" data-i18n="about_p2_desc">
+                                Monitorujemy zmiany w prawie (Bußgeldkatalog), abyś Ty nie musiał.
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+                    <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
+                        <defs>
+                            <pattern id="ca9667ae-9f92-4be7-abcb-9e3d727f2941" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                            </pattern>
+                        </defs>
+                        <rect width="784" height="404" fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
+                    </svg>
+                    <div class="relative mx-auto w-[300px] bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+                         <!-- Decorative UI Mockup (Card) -->
+                         <div class="flex items-center space-x-4 mb-6">
+                             <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">€</div>
+                             <div>
+                                 <div class="h-4 w-32 bg-gray-200 rounded"></div>
+                                 <div class="h-3 w-20 bg-gray-100 rounded mt-2"></div>
+                             </div>
+                         </div>
+                         <div class="space-y-3">
+                             <div class="h-4 w-full bg-gray-100 rounded"></div>
+                             <div class="h-4 w-5/6 bg-gray-100 rounded"></div>
+                             <div class="h-4 w-full bg-gray-100 rounded"></div>
+                         </div>
+                         <div class="mt-6">
+                             <div class="h-10 w-full bg-blue-600 rounded-lg opacity-90"></div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Section -->
+    <div id="rozwoj" class="bg-blue-50 py-16 px-4 sm:px-6 lg:px-8 lg:py-24 border-t border-blue-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center p-4 bg-white rounded-full shadow-md mb-8 animate-pulse">
+                <svg class="h-10 w-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl" data-i18n="soon_title">Już wkrótce</h2>
+            <p class="mt-4 text-xl text-gray-500 max-w-2xl mx-auto" data-i18n="soon_desc">
+                Intensywnie pracujemy nad nową funkcjonalnością.
+            </p>
+            
+            <div class="mt-12 bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100">
+                <div class="px-6 py-8 sm:p-10">
+                    <div class="flex items-center justify-center mb-4">
+                         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800" data-i18n="soon_badge">W produkcji</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 sm:text-3xl" data-i18n="soon_feature_title">Kalkulator Czasu Pracy Kierowców</h3>
+                    <p class="mt-4 text-lg text-gray-500" data-i18n="soon_feature_desc">
+                        Kompleksowe narzędzie do obliczania kar związanych z naruszeniem przepisów o czasie jazdy i odpoczynku w Niemczech (Lenk- und Ruhezeiten).
+                    </p>
+                    <div class="mt-8">
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-200 max-w-md mx-auto">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-400 font-medium">75% <span data-i18n="soon_progress">ukończone</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div id="pobierz" class="bg-gray-900">
+        <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                <span class="block" data-i18n="cta_title">Gotowy do drogi?</span>
+                <span class="block text-blue-400" data-i18n="cta_subtitle">Pobierz aplikację już dziś.</span>
+            </h2>
+            <p class="mt-4 text-lg leading-6 text-gray-300" data-i18n="cta_desc">
+                Miej pewność i spokój podczas podróży przez Niemcy.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition transform hover:scale-105" data-i18n="cta_btn">
+                    Pobierz teraz
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex justify-center md:justify-start space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500 transition hover:scale-110">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400" data-i18n="footer_copy">
+                        &copy; 2026 FineTruck DE. Wszelkie prawa zastrzeżone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Script -->
+    <script>
+        const translations = {
+            'pl': {
+                'nav_features': 'Funkcje',
+                'nav_about': 'O aplikacji',
+                'nav_contact': 'Kontakt',
+                'nav_download': 'Pobierz',
+                'hero_badge': 'Aktualizacja 2026',
+                'hero_title_prefix': 'Kalkulator mandatów',
+                'hero_title_suffix': 'Niemcy 2026',
+                'hero_desc': 'Uniknij niespodzianek na drodze. Oblicz wysokość mandatu szybko i precyzyjnie, zgodnie z najnowszym taryfikatorem niemieckim (Bußgeldkatalog).',
+                'store_sub': 'Dostępne na Androida',
+                'feat_kicker': 'Możliwości',
+                'feat_title': 'Wszystko, czego potrzebujesz',
+                'feat_desc': 'Proste narzędzie do skomplikowanych przepisów. Sprawdź, co oferuje FineTruck DE.',
+                'f1_title': 'Kalkulator 2026',
+                'f1_desc': 'Baza danych zaktualizowana o najnowsze stawki mandatów obowiązujące w Niemczech w 2026 roku.',
+                'f2_title': 'Osobówki i Ciężarowe',
+                'f2_desc': 'Dedykowane tryby obliczeń dla samochodów osobowych oraz pojazdów ciężarowych.',
+                'f3_title': 'Automatyczna tolerancja',
+                'f3_desc': 'Aplikacja automatycznie odejmuje wymaganą prawnie tolerancję (3 km/h lub 3%) od wyniku pomiaru.',
+                
+                // About Section
+                'about_title': 'Dlaczego FineTruck DE?',
+                'about_subtitle': 'Twój osobisty asystent prawny na niemieckich drogach.',
+                'about_head': 'Bezpieczeństwo i pewność',
+                'about_text': 'Podróżowanie po Niemczech, zwłaszcza zawodowo, wiąże się z rygorystycznymi przepisami. Nasza aplikacja pomaga kierowcom i firmom transportowym w szybkiej weryfikacji potencjalnych kar, co pozwala na lepsze planowanie i unikanie stresu.',
+                'about_p1_title': 'Szybkie działanie',
+                'about_p1_desc': 'Wynik otrzymasz w ułamku sekundy. Bez reklam, bez zbędnego klikania.',
+                'about_p2_title': 'Zawsze aktualne',
+                'about_p2_desc': 'Monitorujemy zmiany w prawie (Bußgeldkatalog), abyś Ty nie musiał.',
+
+                // Roadmap Section
+                'soon_title': 'Już wkrótce',
+                'soon_desc': 'Intensywnie pracujemy nad nową funkcjonalnością.',
+                'soon_badge': 'W produkcji',
+                'soon_feature_title': 'Kalkulator Czasu Pracy Kierowców',
+                'soon_feature_desc': 'Kompleksowe narzędzie do obliczania kar związanych z naruszeniem przepisów o czasie jazdy i odpoczynku w Niemczech (Lenk- und Ruhezeiten).',
+                'soon_progress': 'ukończone',
+                
+                'nav_roadmap': 'Rozwój',
+                'qr_text': 'Zeskanuj,<br>aby pobrać',
+
+                'cta_title': 'Gotowy do drogi?',
+                'cta_subtitle': 'Pobierz aplikację już dziś.',
+                'cta_desc': 'Miej pewność i spokój podczas podróży przez Niemcy.',
+                'cta_btn': 'Pobierz teraz',
+                'footer_copy': '&copy; 2026 FineTruck DE | Mariusz Zaniewski. Wszelkie prawa zastrzeżone.'
+            },
+            'de': {
+                'nav_features': 'Funktionen',
+                'nav_about': 'Über die App',
+                'nav_contact': 'Kontakt',
+                'nav_download': 'Herunterladen',
+                'hero_badge': 'Update 2026',
+                'hero_title_prefix': 'Bußgeldrechner',
+                'hero_title_suffix': 'Deutschland 2026',
+                'hero_desc': 'Vermeiden Sie Überraschungen im Straßenverkehr. Berechnen Sie Bußgelder schnell und präzise nach dem aktuellen deutschen Bußgeldkatalog.',
+                'store_sub': 'Verfügbar für Android',
+                'feat_kicker': 'Funktionen',
+                'feat_title': 'Alles, was Sie brauchen',
+                'feat_desc': 'Ein einfaches Tool für komplexe Vorschriften. Sehen Sie, was FineTruck DE bietet.',
+                'f1_title': 'Rechner 2026',
+                'f1_desc': 'Datenbank aktualisiert mit den neuesten Bußgeldsätzen für Deutschland 2026.',
+                'f2_title': 'PKW und LKW',
+                'f2_desc': 'Spezielle Berechnungsmodi für Personenkraftwagen und Lastkraftwagen.',
+                'f3_title': 'Automatische Toleranz',
+                'f3_desc': 'Die App zieht automatisch die gesetzlich vorgeschriebene Toleranz (3 km/h oder 3%) vom Messergebnis ab.',
+                
+                // About Section DE
+                'about_title': 'Warum FineTruck DE?',
+                'about_subtitle': 'Ihr persönlicher Rechtsassistent auf deutschen Straßen.',
+                'about_head': 'Sicherheit und Gewissheit',
+                'about_text': 'Reisen in Deutschland, insbesondere beruflich, sind mit strengen Vorschriften verbunden. Unsere App hilft Fahrern und Transportunternehmen bei der schnellen Überprüfung potenzieller Strafen, was eine bessere Planung und weniger Stress ermöglicht.',
+                'about_p1_title': 'Schnelle Funktion',
+                'about_p1_desc': 'Ergebnis in Sekundenbruchteilen. Keine Werbung, keine unnötigen Klicks.',
+                'about_p2_title': 'Immer aktuell',
+                'about_p2_desc': 'Wir überwachen Gesetzesänderungen (Bußgeldkatalog), damit Sie es nicht müssen.',
+
+                // Roadmap Section DE
+                'soon_title': 'Demnächst',
+                'soon_desc': 'Wir arbeiten intensiv an einer neuen Funktion.',
+                'soon_badge': 'In Produktion',
+                'soon_feature_title': 'Lenk- und Ruhezeiten Rechner',
+                'soon_feature_desc': 'Ein umfassendes Tool zur Berechnung von Bußgeldern bei Verstößen gegen die Lenk- und Ruhezeiten in Deutschland.',
+                'soon_progress': 'fertiggestellt',
+
+                'nav_roadmap': 'Entwicklung',
+                'qr_text': 'Scannen zum<br>Herunterladen',
+
+                'cta_title': 'Bereit für die Fahrt?',
+                'cta_subtitle': 'Laden Sie die App noch heute herunter.',
+                'cta_desc': 'Fahren Sie mit Sicherheit und Ruhe durch Deutschland.',
+                'cta_btn': 'Jetzt herunterladen',
+                'footer_copy': '&copy; 2026 FineTruck DE | Mariusz Zaniewski. Alle Rechte vorbehalten.'
+            }
+        };
+
+        let currentLang = 'pl';
+        const langToggleBtn = document.getElementById('lang-toggle');
+
+        function updateLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update button style
+            const spans = langToggleBtn.querySelectorAll('span');
+            if (lang === 'pl') {
+                spans[0].className = 'font-bold text-gray-900'; // PL active
+                spans[2].className = 'text-gray-400'; // DE inactive
+            } else {
+                spans[0].className = 'text-gray-400'; // PL inactive
+                spans[2].className = 'font-bold text-gray-900'; // DE active
+            }
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'pl' ? 'de' : 'pl';
+            updateLanguage(currentLang);
+        });
+    </script>
+
+</body>
+</html>
