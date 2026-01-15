@@ -52,6 +52,41 @@
 </head>
 <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
 
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-gray-50 transition-opacity duration-500">
+        <div class="flex flex-col items-center space-y-6">
+            <div class="relative group">
+                <!-- Premium Truck Icon with Gradients -->
+                <div class="absolute -inset-4 bg-blue-100 rounded-3xl blur-xl opacity-50 animate-pulse"></div>
+                <svg class="relative w-24 h-24 drop-shadow-2xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="truckGrad" x1="0" y1="0" x2="100" y2="100">
+                            <stop offset="0%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#1e40af" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Background Shape -->
+                    <rect x="10" y="10" width="80" height="80" rx="20" fill="url(#truckGrad)" />
+                    <!-- Stylized Truck Cabin -->
+                    <path d="M30 40H60V65H30V40Z" fill="white" fill-opacity="0.9" />
+                    <path d="M60 45H75L78 55V65H60V45Z" fill="white" fill-opacity="0.7" />
+                    <!-- Windows -->
+                    <rect x="35" y="45" width="20" height="12" rx="2" fill="#1e3a8a" />
+                    <path d="M62 48H70L72 55H62V48Z" fill="#1e3a8a" />
+                    <!-- Wheels -->
+                    <circle cx="40" cy="72" r="6" fill="#0f172a" />
+                    <circle cx="70" cy="72" r="6" fill="#0f172a" />
+                    <circle cx="40" cy="72" r="3" fill="#64748b" />
+                    <circle cx="70" cy="72" r="3" fill="#64748b" />
+                </svg>
+                <div class="absolute -bottom-1 -right-1 bg-white text-blue-600 text-[12px] font-black px-2 py-0.5 rounded-lg shadow-xl border border-blue-50">DE</div>
+            </div>
+            <div class="text-3xl font-black tracking-tighter text-gray-900">
+                FINETRUCK <span class="text-blue-600">DE</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -316,9 +351,11 @@
                             <img src="assets/bag_control.png" alt="BAG Control Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
                             <img src="assets/jail_driver.png" alt="Driver in Jail Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
                             <img src="assets/family_visit.png" alt="Family Visit Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
+                            <img src="assets/tachograph_smash.png" alt="Tachograph Smash Preview" class="slideshow-img col-start-1 row-start-1 w-full h-auto object-contain drop-shadow-2xl transition-opacity duration-1000 opacity-0 rounded-xl">
                         </div>
                         <div class="flex space-x-2 mt-6 z-10">
                             <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-600 transition-all duration-300"></button>
+                            <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
                             <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
                             <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
                             <button class="slideshow-dot w-2.5 h-2.5 rounded-full bg-blue-200 hover:bg-blue-300 transition-all duration-300"></button>
@@ -538,6 +575,19 @@
                 });
             });
         }
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            // Minimum delay to prevent flashing on fast connections
+            setTimeout(() => {
+                preloader.classList.add('opacity-0');
+                preloader.classList.add('pointer-events-none'); // Prevent blocking clicks during fade
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500); // Wait for transition to finish
+            }, 800); // 800ms minimum display time
+        });
     </script>
 
 </body>
