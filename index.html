@@ -86,7 +86,7 @@
                 </svg>
                 <div class="absolute -bottom-1 -right-1 bg-white text-blue-600 text-[12px] font-black px-2 py-0.5 rounded-lg shadow-xl border border-blue-50">DE</div>
             </div>
-            <div class="text-3xl font-black tracking-tighter text-gray-900">
+            <div class="text-3xl font-black tracking-tighter text-gray-900 dark:text-white">
                 FINETRUCK <span class="text-blue-600">DE</span>
             </div>
         </div>
@@ -150,12 +150,9 @@
                                 Google Play
                             </button>
                             
-                            <!-- QR Code Container (Fixed Size) -->
-                            <div class="hidden lg:flex w-64 h-16 items-center justify-center gap-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm transform transition hover:scale-105 hover:shadow-md cursor-pointer">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store" alt="QR Code" class="w-10 h-10 rounded-lg mix-blend-multiply dark:mix-blend-normal dark:bg-white flex-shrink-0">
-                                <div class="text-xs text-gray-600 dark:text-gray-300 font-semibold leading-snug text-left">
-                                    <span data-i18n="qr_text">Zeskanuj,<br>aby pobrać</span>
-                                </div>
+                            <!-- QR Code (Embedded) -->
+                            <div class="hidden lg:flex flex-col items-center justify-center ml-4">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store" alt="QR Code" class="w-32 h-32 mix-blend-multiply dark:mix-blend-screen dark:invert opacity-80 hover:opacity-100 transition-opacity">
                             </div>
                         </div>
                        
