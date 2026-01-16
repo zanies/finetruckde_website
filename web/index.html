@@ -100,9 +100,9 @@
                     <span class="font-bold text-xl tracking-tight text-gray-900 dark:text-white">FineTruck DE 🇩🇪</span>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#funkcje" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_features">Funkcje</a>
-                    <a href="#o-aplikacji" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_about">O aplikacji</a>
-                    <a href="#rozwoj" class="text-gray-500 hover:text-gray-900 transition px-3 py-2 text-sm font-medium" data-i18n="nav_roadmap">Rozwój</a>
+                    <a href="#funkcje" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-900 dark:hover:bg-white rounded-lg transition-all px-3 py-2 text-sm font-medium" data-i18n="nav_features">Funkcje</a>
+                    <a href="#o-aplikacji" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-900 dark:hover:bg-white rounded-lg transition-all px-3 py-2 text-sm font-medium" data-i18n="nav_about">O aplikacji</a>
+                    <a href="#rozwoj" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-900 dark:hover:bg-white rounded-lg transition-all px-3 py-2 text-sm font-medium" data-i18n="nav_roadmap">Rozwój</a>
                     
                     <!-- Language Switcher -->
                     <button id="lang-toggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition text-sm font-semibold text-gray-600 dark:text-gray-300">
@@ -451,7 +451,7 @@
                 'soon_title': 'Już wkrótce',
                 'soon_desc': 'Intensywnie pracujemy nad nową funkcjonalnością.',
                 'soon_badge': 'W produkcji',
-                'soon_feature_title': 'Kalkulator Czasu Pracy Kierowców',
+                'soon_feature_title': 'Taryfikator Czasu Pracy Kierowców',
                 'soon_feature_desc': 'Kompleksowe narzędzie do obliczania kar związanych z naruszeniem przepisów o czasie jazdy i odpoczynku w Niemczech (Lenk- und Ruhezeiten).',
                 'soon_progress': 'ukończone',
                 
@@ -605,8 +605,8 @@
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Check preference
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Initial check based on system preference only
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark');
             themeToggleLightIcon.classList.remove('hidden');
         } else {
@@ -619,24 +619,8 @@
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
 
-            // If is set in localstorage
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            }
+            // Toggle mode without saving to localStorage
+            document.documentElement.classList.toggle('dark');
         });
     </script>
 
