@@ -72,6 +72,44 @@
             animation: shine 0.75s;
         }
 
+        /* Border Shine Animation */
+        @keyframes spin-beam {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .mockup-shine-wrapper {
+            position: absolute;
+            inset: -4px; /* Outside the border */
+            border-radius: 2.8rem; /* Matches outer radius roughly */
+            padding: 3px; /* Thickness of shine */
+            overflow: hidden;
+            z-index: 30;
+            pointer-events: none;
+            
+            /* Mask to creates a border-only view */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .mockup-shine-beam {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(transparent 85%, #3b82f6 100%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .group:hover .mockup-shine-beam {
+            opacity: 1;
+            animation: spin-beam 3s linear infinite;
+        }
+
 
     </style>
 </head>
@@ -300,7 +338,11 @@
                 <!-- Phone 1 -->
                 <div class="relative w-64 md:w-72 group">
                      <!-- Mockup Frame -->
-                    <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl overflow-hidden transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
+                    <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
+                        <!-- Shine Effect -->
+                        <div class="mockup-shine-wrapper">
+                            <div class="mockup-shine-beam"></div>
+                        </div>
                          <!-- Camera Notch -->
                         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 z-20 rounded-b-xl flex justify-center items-center">
                              <div class="w-20 h-4 bg-black rounded-full"></div>
@@ -315,7 +357,11 @@
                 <!-- Phone 2 -->
                 <div class="relative w-64 md:w-72 group">
                      <!-- Mockup Frame -->
-                    <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl overflow-hidden transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
+                    <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
+                        <!-- Shine Effect -->
+                        <div class="mockup-shine-wrapper">
+                            <div class="mockup-shine-beam"></div>
+                        </div>
                          <!-- Camera Notch -->
                         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 z-20 rounded-b-xl flex justify-center items-center">
                              <div class="w-20 h-4 bg-black rounded-full"></div>
