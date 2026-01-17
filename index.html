@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FineTruck DE - Kalkulator Mandatów Niemcy 2026</title>
-    <script>
-        // Dark mode initialization (must run before page renders to prevent flash)
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-    </script>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Oblicz wysokość mandatu szybko i precyzyjnie, zgodnie z najnowszym taryfikatorem niemieckim (Bußgeldkatalog 2026). Aplikacja dla kierowców zawodowych i osobowych.">
+    <meta name="keywords" content="mandaty niemcy, taryfikator 2026, bußgeldkatalog, kalkulator mandatów, kierowca ciężarówki, lkw, mandaty bag">
+    <meta name="author" content="Mariusz Zaniewski">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://finetruck.de/">
+    <meta property="og:title" content="FineTruck DE - Kalkulator Mandatów Niemcy 2026">
+    <meta property="og:description" content="Oblicz wysokość mandatu szybko i precyzyjnie. Najnowszy taryfikator 2026. Pobierz aplikację dla kierowców.">
+    <meta property="og:image" content="https://finetruck.de/assets/flutter_01-portrait.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://finetruck.de/">
+    <meta property="twitter:title" content="FineTruck DE - Kalkulator Mandatów Niemcy 2026">
+    <meta property="twitter:description" content="Oblicz wysokość mandatu szybko i precyzyjnie. Najnowszy taryfikator 2026.">
+    <meta property="twitter:image" content="https://finetruck.de/assets/flutter_01-portrait.webp">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,121 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* Custom Animations */
-        @keyframes float {
-            0% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(0px); }
-            50% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(-20px); }
-            100% { transform: perspective(2000px) rotateY(-10deg) rotateX(5deg) translateY(0px); }
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* 3D Depth Effect using box-shadow */
-        .phone-3d {
-            box-shadow: 
-                -15px 15px 30px rgba(0,0,0,0.3), /* Deep shadow */
-                -2px 2px 0px #1f2937, /* Fake thickness (Dark Gray) */
-                -4px 4px 0px #111827; /* Fake thickness (Black) */
-            transition: all 0.3s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .fade-in-up {
-            opacity: 0; /* Start hidden */
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-
-        /* Shine Effect */
-        @keyframes shine {
-            100% { left: 125%; }
-        }
-        .shine-effect {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            pointer-events: none;
-        }
-        .group:hover .shine-effect {
-            animation: shine 0.75s;
-        }
-
-        /* Border Shine Animation - Sequential Loop */
-        @keyframes shine-sequence {
-            0% { 
-                opacity: 0; 
-                transform: translate(-50%, -50%) rotate(0deg); 
-            }
-            10% { opacity: 1; }
-            40% { opacity: 1; }
-            50% { 
-                opacity: 0; 
-                transform: translate(-50%, -50%) rotate(360deg); 
-            }
-            100% { 
-                opacity: 0; 
-                transform: translate(-50%, -50%) rotate(360deg); 
-            }
-        }
-
-        .mockup-shine-wrapper {
-            position: absolute;
-            inset: -4px; /* Outside the border */
-            border-radius: 2.8rem; /* Matches outer radius roughly */
-            padding: 3px; /* Thickness of shine */
-            overflow: hidden;
-            z-index: 30;
-            pointer-events: none;
-            
-            /* Mask to creates a border-only view */
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-        }
-
-        .mockup-shine-beam {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: conic-gradient(transparent 85%, #3b82f6 100%);
-            transform: translate(-50%, -50%);
-            opacity: 0; /* Default hidden */
-        }
-
-        .mockup-shine-beam.cycle-1 {
-            animation: shine-sequence 6s linear infinite;
-            animation-delay: 0s;
-        }
-
-        .mockup-shine-beam.cycle-2 {
-            animation: shine-sequence 6s linear infinite;
-            animation-delay: 3s; /* Starts when cycle-1 ends its active phase */
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-900 overflow-x-hidden dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
 
@@ -592,7 +492,7 @@
     </footer>
 
     <!-- Main Application Script (Optimized) -->
-    <script src="app.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
 
 </body>
 </html>
