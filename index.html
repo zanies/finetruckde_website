@@ -283,6 +283,54 @@
         </div>
     </div>
 
+    <!-- Gallery Section -->
+    <div id="galeria" class="bg-gray-50 dark:bg-gray-800 py-16 sm:py-24 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-base font-semibold text-blue-600 dark:text-blue-400 tracking-wide uppercase" data-i18n="gallery_kicker">Interfejs</h2>
+                <p class="mt-1 text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl" data-i18n="gallery_title">
+                    Przejrzysty i intuicyjny
+                </p>
+                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500 dark:text-gray-400" data-i18n="gallery_desc">
+                    Każdy ekran został zaprojektowany z myślą o czytelności w trudnych warunkach.
+                </p>
+            </div>
+
+            <!-- Scrollable Container for Mobile, Grid for Desktop -->
+            <div class="flex overflow-x-auto pb-8 space-x-6 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-8 snap-x snap-mandatory scrollbar-hide">
+                
+                <!-- Image 1 -->
+                <div class="snap-center shrink-0 w-64 sm:w-auto relative group">
+                    <div class="aspect-[9/19] rounded-2xl overflow-hidden shadow-xl border-4 border-gray-900 bg-gray-900">
+                        <img src="assets/lkw_calculator.png" alt="Kalkulator" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="snap-center shrink-0 w-64 sm:w-auto relative group">
+                    <div class="aspect-[9/19] rounded-2xl overflow-hidden shadow-xl border-4 border-gray-900 bg-gray-900">
+                        <img src="assets/bag_control.png" alt="Kontrola BAG" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="snap-center shrink-0 w-64 sm:w-auto relative group">
+                    <div class="aspect-[9/19] rounded-2xl overflow-hidden shadow-xl border-4 border-gray-900 bg-gray-900">
+                        <img src="assets/tachograph_smash.png" alt="Tachograf" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                </div>
+
+                 <!-- Image 4 -->
+                <div class="snap-center shrink-0 w-64 sm:w-auto relative group">
+                    <div class="aspect-[9/19] rounded-2xl overflow-hidden shadow-xl border-4 border-gray-900 bg-gray-900">
+                        <img src="assets/jail_driver.png" alt="Więzienie" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- About Section -->
     <div id="o-aplikacji" class="py-16 bg-white dark:bg-gray-900 overflow-hidden lg:py-24 transition-colors duration-300">
         <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -497,6 +545,11 @@
                 'f3_title': 'Automatyczna tolerancja',
                 'f3_desc': 'Aplikacja automatycznie odejmuje wymaganą prawnie tolerancję (3 km/h lub 3%) od wyniku pomiaru.',
                 
+                // Gallery Section
+                'gallery_kicker': 'Interfejs',
+                'gallery_title': 'Przejrzysty i intuicyjny',
+                'gallery_desc': 'Każdy ekran został zaprojektowany z myślą o czytelności w trudnych warunkach.',
+
                 // About Section
                 'about_title': 'Dlaczego FineTruck DE?',
                 'about_subtitle': 'Twój osobisty asystent prawny na niemieckich drogach.',
@@ -543,6 +596,11 @@
                 'f3_title': 'Automatische Toleranz',
                 'f3_desc': 'Die App zieht automatisch die gesetzlich vorgeschriebene Toleranz (3 km/h oder 3%) vom Messergebnis ab.',
                 
+                // Gallery Section DE
+                'gallery_kicker': 'Schnittstelle',
+                'gallery_title': 'Klar und intuitiv',
+                'gallery_desc': 'Jeder Bildschirm wurde für die Lesbarkeit unter schwierigen Bedingungen entwickelt.',
+
                 // About Section DE
                 'about_title': 'Warum FineTruck DE?',
                 'about_subtitle': 'Ihr persönlicher Rechtsassistent auf deutschen Straßen.',
