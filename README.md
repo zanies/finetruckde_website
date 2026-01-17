@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![FineTruck DE Logo](assets/flutter_01-portrait.png)
+![FineTruck DE Logo](assets/flutter_01-portrait.webp)
 
 **Twój osobisty asystent prawny na niemieckich drogach**
 
@@ -91,12 +91,12 @@ finetruckde_website/
 ├── GEMINI.md              # Dokumentacja dodatkowa
 ├── .gitignore             # Pliki ignorowane przez Git
 └── assets/                # Zasoby multimedialne
-    ├── flutter_01-portrait.png      # Mockup aplikacji
-    ├── lkw_calculator.png           # Preview kalkulatora LKW
-    ├── bag_control.png              # Preview kontroli BAG
-    ├── jail_driver.png              # Preview komunikatu karnego
-    ├── family_visit.png             # Preview funkcji
-    └── tachograph_smash.png         # Preview funkcji tachografu
+    ├── flutter_01-portrait.webp      # Mockup aplikacji
+    ├── lkw_calculator.webp           # Preview kalkulatora LKW
+    ├── bag_control.webp              # Preview kontroli BAG
+    ├── jail_driver.webp              # Preview komunikatu karnego
+    ├── family_visit.webp             # Preview funkcji
+    └── tachograph_smash.webp         # Preview funkcji tachografu
 ```
 
 ---
@@ -149,7 +149,7 @@ live-server
 <div align="center">
 
 ### 🌅 Tryb jasny
-![Light Mode](assets/flutter_01-portrait.png)
+![Light Mode](assets/flutter_01-portrait.webp)
 
 ### 🌙 Dark Mode
 Strona automatycznie dostosowuje się do preferencji systemowych

@@ -15,7 +15,7 @@ This project is a static landing page for **FineTruck DE**, a mobile application
 ├── web/
 │   ├── index.html        # Main application file (HTML + CSS + JS)
 │   └── assets/
-│       └── flutter_01-portrait.png  # App mockup image
+│       └── flutter_01-portrait.webp  # App mockup image
 ├── unnamed.jpg           # Reference image (unused in build)
 └── GEMINI.md             # Project documentation
 ```
