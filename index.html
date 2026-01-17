@@ -620,11 +620,13 @@
             // Update dots
             dots.forEach((dot, i) => {
                 if (i === index) {
-                    dot.classList.remove('bg-blue-200');
+                    // Active State
+                    dot.classList.remove('bg-blue-200', 'dark:bg-gray-700');
                     dot.classList.add('bg-blue-600');
                 } else {
+                    // Inactive State
                     dot.classList.remove('bg-blue-600');
-                    dot.classList.add('bg-blue-200');
+                    dot.classList.add('bg-blue-200', 'dark:bg-gray-700');
                 }
             });
 
