@@ -72,10 +72,22 @@
             animation: shine 0.75s;
         }
 
-        /* Border Shine Animation */
-        @keyframes spin-beam {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        /* Border Shine Animation - Sequential Loop */
+        @keyframes shine-sequence {
+            0% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) rotate(0deg); 
+            }
+            10% { opacity: 1; }
+            40% { opacity: 1; }
+            50% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) rotate(360deg); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) rotate(360deg); 
+            }
         }
 
         .mockup-shine-wrapper {
@@ -101,13 +113,17 @@
             height: 300%;
             background: conic-gradient(transparent 85%, #3b82f6 100%);
             transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0; /* Default hidden */
         }
 
-        .group:hover .mockup-shine-beam {
-            opacity: 1;
-            animation: spin-beam 3s linear infinite;
+        .mockup-shine-beam.cycle-1 {
+            animation: shine-sequence 6s linear infinite;
+            animation-delay: 0s;
+        }
+
+        .mockup-shine-beam.cycle-2 {
+            animation: shine-sequence 6s linear infinite;
+            animation-delay: 3s; /* Starts when cycle-1 ends its active phase */
         }
 
 
@@ -341,7 +357,7 @@
                     <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
                         <!-- Shine Effect -->
                         <div class="mockup-shine-wrapper">
-                            <div class="mockup-shine-beam"></div>
+                            <div class="mockup-shine-beam cycle-1"></div>
                         </div>
                          <!-- Camera Notch -->
                         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 z-20 rounded-b-xl flex justify-center items-center">
@@ -360,7 +376,7 @@
                     <div class="relative rounded-[2.5rem] border-[8px] border-gray-900 bg-gray-900 shadow-2xl transform transition duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
                         <!-- Shine Effect -->
                         <div class="mockup-shine-wrapper">
-                            <div class="mockup-shine-beam"></div>
+                            <div class="mockup-shine-beam cycle-2"></div>
                         </div>
                          <!-- Camera Notch -->
                         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 z-20 rounded-b-xl flex justify-center items-center">
