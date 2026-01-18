@@ -137,6 +137,7 @@
     // Slideshow with Intersection Observer
     let slideshowInterval = null;
     let slideshowObserver = null;
+    let slideshowEventsBound = false;
 
     function initSlideshow() {
         const slides = document.querySelectorAll('.slideshow-img');
@@ -180,7 +181,7 @@
         }
 
         // Use Intersection Observer to pause slideshow when not visible
-        if ('IntersectionObserver' in window) {
+        if ('IntersectionObserver' in window && !slideshowObserver) {
             const slideshowContainer = slides[0].closest('.grid');
             if (slideshowContainer) {
                 slideshowObserver = new IntersectionObserver((entries) => {
@@ -195,17 +196,20 @@
 
                 slideshowObserver.observe(slideshowContainer);
             }
-        } else {
+        } else if (!('IntersectionObserver' in window)) {
             // Fallback for browsers without Intersection Observer
             startSlideshow();
         }
 
-        // Click handling for dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                updateSlide(index);
+        // Click handling for dots - bind only once
+        if (!slideshowEventsBound) {
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateSlide(index);
+                });
             });
-        });
+            slideshowEventsBound = true;
+        }
     }
 
     // Preloader Logic
@@ -272,8 +276,16 @@
         initLanguageSwitcher();
         initSlideshow();
 
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', cleanup);
+        // Cleanup on page unload - REMOVED to support bfcache
+        // window.addEventListener('beforeunload', cleanup);
+        
+        // Handle Page Restore (bfcache)
+        window.addEventListener('pageshow', (event) => {
+            // If the page is restored from bfcache, ensure slideshow is running
+            if (event.persisted || !slideshowObserver) {
+                 initSlideshow();
+            }
+        });
     }
 
     // Run when DOM is ready
