@@ -132,6 +132,19 @@
             spans[0].className = 'text-gray-400 dark:text-gray-500';
             spans[2].className = 'font-bold text-gray-900 dark:text-white';
         }
+
+        // Update Screenshots
+        const screenshot1 = document.getElementById('screenshot-1');
+        const screenshot2 = document.getElementById('screenshot-2');
+        if (screenshot1 && screenshot2) {
+            if (lang === 'de') {
+                screenshot1.src = 'assets/flutter_01_de.webp';
+                screenshot2.src = 'assets/flutter_02_de.webp';
+            } else {
+                screenshot1.src = 'assets/flutter_01.webp';
+                screenshot2.src = 'assets/flutter_02.webp';
+            }
+        }
     }
 
     // Slideshow with Intersection Observer
