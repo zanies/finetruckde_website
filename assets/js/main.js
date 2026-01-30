@@ -96,12 +96,16 @@
 
     // Cache for DOM elements
     let cachedTranslatableElements = null;
-    let currentLang = 'pl';
+    let currentLang = /^de\b/i.test(navigator.language) ? 'de' : 'pl';
 
     // Language Switcher with DOM caching
     function initLanguageSwitcher() {
         const langToggleBtn = document.getElementById('lang-toggle');
         if (!langToggleBtn) return;
+
+        if (currentLang === 'de') {
+            updateLanguage('de');
+        }
 
         langToggleBtn.addEventListener('click', () => {
             currentLang = currentLang === 'pl' ? 'de' : 'pl';
@@ -110,6 +114,8 @@
     }
 
     function updateLanguage(lang) {
+        document.documentElement.lang = lang;
+
         // Cache translatable elements on first run
         if (!cachedTranslatableElements) {
             cachedTranslatableElements = document.querySelectorAll('[data-i18n]');
